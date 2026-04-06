@@ -1,17 +1,1028 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Olho de Saturno Studio</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; background-color: #1a1a1a; color: #ffffff;}
-        h1 { color: #f39c12; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ciro K. — Builder digital do Brasil</title>
+  <meta name="description" content="Portfólio de Ciro K.: produtos digitais, automações, dashboards, apps e sistemas construídos no Brasil." />
+  <meta name="theme-color" content="#0f1016" />
+  <meta property="og:title" content="Ciro K. — Builder digital do Brasil" />
+  <meta property="og:description" content="Projetos reais, em produção e em evolução: dashboards, apps, automações e ferramentas web." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://cirokk.github.io/" />
+  <style>
+    :root {
+      --bg: #0f1016;
+      --bg-soft: #161923;
+      --panel: rgba(255,255,255,.04);
+      --panel-strong: rgba(255,255,255,.07);
+      --line: rgba(255,255,255,.1);
+      --text: #f4f1ea;
+      --muted: #b8b2a7;
+      --gold: #e7b96c;
+      --gold-2: #ffdb9f;
+      --blue: #7ad4ff;
+      --green: #98f5b5;
+      --shadow: 0 30px 80px rgba(0,0,0,.45);
+      --max: 1240px;
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(231,185,108,.18), transparent 30%),
+        radial-gradient(circle at 82% 15%, rgba(122,212,255,.14), transparent 28%),
+        radial-gradient(circle at 70% 75%, rgba(152,245,181,.08), transparent 24%),
+        linear-gradient(180deg, #0d0f15 0%, #10131b 42%, #0b0c12 100%);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(circle at center, black 38%, transparent 100%);
+      opacity: .35;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .shell {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 14px;
+      z-index: 50;
+      margin: 18px auto 0;
+      width: min(calc(100% - 24px), 1100px);
+      backdrop-filter: blur(18px);
+      background: rgba(8,10,15,.56);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+      letter-spacing: .12em;
+      background: linear-gradient(145deg, rgba(231,185,108,.28), rgba(255,255,255,.05));
+      border: 1px solid rgba(255,255,255,.14);
+      color: var(--gold-2);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+      flex: 0 0 auto;
+    }
+
+    .brand-copy { min-width: 0; }
+    .brand-copy strong {
+      display: block;
+      font-size: 14px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .brand-copy span {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--muted);
+      transition: .25s ease;
+    }
+    .nav a:hover {
+      color: var(--text);
+      background: rgba(255,255,255,.06);
+    }
+
+    .hero {
+      padding: 72px 0 24px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.45fr .95fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,.06), transparent 30%, transparent 70%, rgba(231,185,108,.05));
+      pointer-events: none;
+    }
+
+    .hero-main {
+      padding: 36px;
+      min-height: 620px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .eyebrow,
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--gold-2);
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, .display {
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+      font-weight: 500;
+      line-height: .96;
+      margin: 0;
+    }
+
+    .display {
+      font-size: clamp(56px, 8vw, 108px);
+      max-width: 10ch;
+      margin-top: 20px;
+      letter-spacing: -.05em;
+    }
+
+    .hero-copy {
+      max-width: 58ch;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.7;
+    }
+
+    .hero-copy strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-size: 14px;
+      letter-spacing: .04em;
+      border: 1px solid rgba(255,255,255,.12);
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), #bb8542);
+      color: #16120c;
+      border-color: rgba(255,219,159,.45);
+      font-weight: 700;
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+    }
+
+    .hero-footer {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 44px;
+    }
+
+    .mini {
+      background: rgba(255,255,255,.035);
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 20px;
+      padding: 18px;
+    }
+
+    .mini b {
+      display: block;
+      font-size: 28px;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .mini span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      display: block;
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 18px;
+      grid-template-rows: 1.1fr .9fr;
+    }
+
+    .portrait-card,
+    .notes-card {
+      padding: 28px;
+    }
+
+    .portrait-frame {
+      aspect-ratio: 4 / 5;
+      width: 100%;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,.11);
+      background:
+        radial-gradient(circle at 25% 25%, rgba(231,185,108,.34), transparent 24%),
+        radial-gradient(circle at 78% 18%, rgba(122,212,255,.22), transparent 22%),
+        radial-gradient(circle at 58% 72%, rgba(152,245,181,.12), transparent 18%),
+        linear-gradient(155deg, #171a22 0%, #0f1118 100%);
+      padding: 20px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portrait-frame::before,
+    .portrait-frame::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(2px);
+    }
+
+    .portrait-frame::before {
+      width: 240px;
+      height: 240px;
+      right: -70px;
+      top: -40px;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .portrait-frame::after {
+      width: 150px;
+      height: 150px;
+      left: -34px;
+      bottom: 46px;
+      border: 1px solid rgba(255,255,255,.05);
+    }
+
+    .portrait-lines {
+      position: absolute;
+      inset: 18px;
+      border-radius: 22px;
+      border: 1px dashed rgba(255,255,255,.07);
+      pointer-events: none;
+    }
+
+    .portrait-label {
+      position: relative;
+      z-index: 1;
+      max-width: 70%;
+    }
+
+    .portrait-label strong {
+      display: block;
+      font-size: 32px;
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+
+    .portrait-label p,
+    .note-list li,
+    .timeline-item p,
+    .project p,
+    .about-copy p,
+    .contact-copy p,
+    .footer p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .stamp {
+      position: relative;
+      z-index: 1;
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.12);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--gold-2);
+      background: rgba(255,255,255,.04);
+      padding: 10px;
+    }
+
+    .section {
+      padding: 26px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 22px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(34px, 5vw, 64px);
+      letter-spacing: -.05em;
+    }
+
+    .section-head p {
+      max-width: 52ch;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+
+    .project {
+      grid-column: span 6;
+      padding: 26px;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project.featured {
+      grid-column: span 12;
+      min-height: 320px;
+      background:
+        radial-gradient(circle at right top, rgba(122,212,255,.08), transparent 28%),
+        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
+    }
+
+    .project-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .project-type {
+      color: var(--gold-2);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: 12px;
+      margin-bottom: 14px;
+      display: inline-block;
+    }
+
+    .project h3 {
+      font-size: clamp(26px, 3vw, 42px);
+      line-height: 1.02;
+      letter-spacing: -.04em;
+      margin-bottom: 14px;
+      max-width: 13ch;
+    }
+
+    .project p { margin-bottom: 18px; }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .tag {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+      color: #ddd6ca;
+      font-size: 12px;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      font-size: 13px;
+      transition: .2s ease;
+    }
+
+    .project-link:hover {
+      background: rgba(255,255,255,.09);
+      border-color: rgba(255,255,255,.16);
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .timeline-item {
+      padding: 24px;
+      min-height: 220px;
+    }
+
+    .timeline-item b {
+      display: block;
+      color: var(--gold-2);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-size: 11px;
+      margin-bottom: 16px;
+    }
+
+    .timeline-item h3 {
+      font-size: 28px;
+      line-height: 1.08;
+      letter-spacing: -.04em;
+      margin-bottom: 12px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 18px;
+    }
+
+    .about-copy,
+    .contact-card {
+      padding: 30px;
+    }
+
+    .quote {
+      font-size: clamp(32px, 4vw, 56px);
+      line-height: 1.08;
+      letter-spacing: -.05em;
+      margin: 18px 0 24px;
+    }
+
+    .stack-list,
+    .note-list {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .stack-list li,
+    .note-list li {
+      padding: 14px 16px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .stack-list span:first-child,
+    .note-list span:first-child {
+      color: var(--text);
+    }
+
+    .stack-list span:last-child,
+    .note-list span:last-child {
+      color: var(--muted);
+      text-align: right;
+    }
+
+    .contact-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100%;
+    }
+
+    .contact-links {
+      display: grid;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .contact-links a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 18px;
+      background: rgba(255,255,255,.045);
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 18px;
+      transition: .2s ease;
+    }
+
+    .contact-links a:hover {
+      transform: translateX(4px);
+      background: rgba(255,255,255,.07);
+    }
+
+    .footer {
+      padding: 28px 0 64px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .about-grid,
+      .timeline {
+        grid-template-columns: 1fr;
+      }
+
+      .projects-grid { grid-template-columns: repeat(1, 1fr); display: grid; }
+      .project, .project.featured { grid-column: auto; }
+      .hero-main { min-height: auto; }
+      .section-head { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 760px) {
+      .topbar {
+        border-radius: 26px;
+        padding: 14px;
+        display: grid;
+        gap: 14px;
+      }
+
+      .nav {
+        justify-content: flex-start;
+      }
+
+      .hero { padding-top: 44px; }
+      .hero-main,
+      .portrait-card,
+      .notes-card,
+      .project,
+      .timeline-item,
+      .about-copy,
+      .contact-card {
+        padding: 22px;
+      }
+
+      .hero-footer {
+        grid-template-columns: 1fr;
+      }
+
+      .display {
+        font-size: clamp(44px, 15vw, 72px);
+      }
+
+      .hero-copy {
+        font-size: 17px;
+      }
+
+      .portrait-frame {
+        aspect-ratio: 1 / 1.1;
+      }
+
+      .stack-list li,
+      .note-list li,
+      .contact-links a {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .stack-list span:last-child,
+      .note-list span:last-child {
+        text-align: left;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>Olho de Saturno Studio</h1>
-    <p>Soluções em marketing audiovisual e tráfego pago.</p>
-    <p>Site em construção...</p>
+  <header class="topbar reveal">
+    <div class="brand">
+      <div class="brand-mark">CK</div>
+      <div class="brand-copy">
+        <strong>Ciro K.</strong>
+        <span>builder digital · Brasil · produtos que saem do papel</span>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="#projetos">Projetos</a>
+      <a href="#agora">Agora</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div class="hero-grid">
+        <article class="card hero-main reveal">
+          <div>
+            <span class="eyebrow">Portfólio / GitHub Pages / Brasil</span>
+            <h1 class="display">Construo software útil com cara própria.</h1>
+            <p class="hero-copy">
+              Sou <strong>Ciro</strong>, builder digital no Brasil. Gosto de transformar ideia em produto real: <strong>dashboards</strong>, <strong>ferramentas web</strong>, <strong>automações</strong> e <strong>apps</strong> que resolvem problema de verdade. Meu jeito de construir mistura execução rápida, refino visual e obsessão por tirar o projeto do estado de promessa.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="https://github.com/cirokk" target="_blank" rel="noreferrer">Ver GitHub</a>
+              <a class="btn btn-secondary" href="#projetos">Explorar projetos</a>
+            </div>
+          </div>
+          <div class="hero-footer">
+            <div class="mini">
+              <b>03</b>
+              <span>repositórios públicos ativos já conectados ao meu perfil hoje</span>
+            </div>
+            <div class="mini">
+              <b>Brasil</b>
+              <span>base de operação, contexto local e execução prática</span>
+            </div>
+            <div class="mini">
+              <b>Build → Deploy</b>
+              <span>prefiro coisa publicada, usável e iterável a conceito bonito sem entrega</span>
+            </div>
+          </div>
+        </article>
+
+        <aside class="hero-side">
+          <div class="card portrait-card reveal">
+            <div class="portrait-frame">
+              <div class="portrait-lines"></div>
+              <div class="portrait-label">
+                <strong>Ciro K.</strong>
+                <p>Produtos digitais, interfaces, automações, dashboards e sistemas em evolução contínua.</p>
+              </div>
+              <div class="stamp">made in Brazil</div>
+            </div>
+          </div>
+
+          <div class="card notes-card reveal">
+            <span class="chip">Como eu trabalho</span>
+            <ul class="note-list">
+              <li>
+                <span>Execução antes da pose</span>
+                <span>tirar da ideia e colocar rodando</span>
+              </li>
+              <li>
+                <span>Design com identidade</span>
+                <span>nada de página genérica com cara de template</span>
+              </li>
+              <li>
+                <span>Produto em movimento</span>
+                <span>manter, melhorar e evoluir o que já existe</span>
+              </li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="projetos">
+      <div class="section-head reveal">
+        <div>
+          <span class="chip">Projetos</span>
+          <h2>Coisas que já publiquei e coisas que ainda estou lapidando.</h2>
+        </div>
+        <p>
+          Alguns projetos já têm repositório público. Outros estão em desenvolvimento ativo e aparecem aqui como parte do meu mapa de construção — porque portfólio bom não mostra só vitrine pronta; mostra direção, repertório e capacidade real de execução.
+        </p>
+      </div>
+
+      <div class="projects-grid">
+        <article class="card project featured reveal">
+          <div>
+            <div class="project-top">
+              <div>
+                <span class="project-type">Publicado no GitHub</span>
+                <h3>AdDash</h3>
+              </div>
+              <span class="tag">Dashboard de performance</span>
+            </div>
+            <p>
+              Dashboard de performance para agências de tráfego pago. Estruturei para centralizar métricas, perfis, visualização por cliente e operação mais clara no dia a dia. É o tipo de produto que nasce de necessidade real de negócio, não de exercício de portfólio.
+            </p>
+          </div>
+          <div>
+            <div class="tags">
+              <span class="tag">JavaScript</span>
+              <span class="tag">Analytics</span>
+              <span class="tag">Dashboard</span>
+              <span class="tag">Produto real</span>
+            </div>
+            <div class="project-links">
+              <a class="project-link" href="https://github.com/cirokk/addash" target="_blank" rel="noreferrer">GitHub ↗</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card project reveal">
+          <div>
+            <span class="project-type">Publicado no GitHub</span>
+            <h3>InstaVault</h3>
+            <p>
+              Extrator de mídia pública do Instagram com foco em utilidade prática. Projeto pensado para baixar assets públicos com interface web e API simples, mantendo o repositório público limpo e sem dados sensíveis.
+            </p>
+          </div>
+          <div>
+            <div class="tags">
+              <span class="tag">Node.js</span>
+              <span class="tag">Express</span>
+              <span class="tag">Playwright</span>
+            </div>
+            <div class="project-links">
+              <a class="project-link" href="https://github.com/cirokk/insta-vault" target="_blank" rel="noreferrer">GitHub ↗</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card project reveal">
+          <div>
+            <span class="project-type">Em operação / desenvolvimento</span>
+            <h3>TrafficDash</h3>
+            <p>
+              Plataforma de performance para a Wave, rodando em Docker e pensada para operação contínua. Junta backend, frontend, autenticação, sessões, gestão e leitura clara de indicadores para clientes e admin.
+            </p>
+          </div>
+          <div>
+            <div class="tags">
+              <span class="tag">Node 22</span>
+              <span class="tag">Express 5</span>
+              <span class="tag">Supabase</span>
+              <span class="tag">Docker</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card project reveal">
+          <div>
+            <span class="project-type">Em desenvolvimento</span>
+            <h3>Imóveis AI</h3>
+            <p>
+              SaaS para corretores com dashboard, gestão de imóveis, clientes, follow-ups e base para IA + WhatsApp. Um projeto mais orientado a operação comercial, com foco em ferramenta útil e visual premium.
+            </p>
+          </div>
+          <div>
+            <div class="tags">
+              <span class="tag">React</span>
+              <span class="tag">Vite</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">CRM</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card project reveal">
+          <div>
+            <span class="project-type">Produto mobile em evolução</span>
+            <h3>OpenFluxo</h3>
+            <p>
+              Fork do FluxoZen com direção freemium clara, foco em Android e monetização bem pensada. A ideia é ser útil de graça, provar valor e só então escalar o premium com inteligência.
+            </p>
+          </div>
+          <div>
+            <div class="tags">
+              <span class="tag">Expo</span>
+              <span class="tag">React Native</span>
+              <span class="tag">RevenueCat</span>
+              <span class="tag">Mobile</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card project reveal">
+          <div>
+            <span class="project-type">Labs / sistemas / exploração</span>
+            <h3>Outras frentes</h3>
+            <p>
+              Também venho trabalhando em sistema de documentos médicos, plano de corte para marcenaria, laboratório de UX e outras frentes que misturam produto, automação, lógica de negócio e interface. Gosto desse território entre software útil e construção estratégica.
+            </p>
+          </div>
+          <div>
+            <div class="tags">
+              <span class="tag">Sistemas web</span>
+              <span class="tag">Automação</span>
+              <span class="tag">UX aplicada</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="agora">
+      <div class="section-head reveal">
+        <div>
+          <span class="chip">Agora</span>
+          <h2>O que está em movimento neste momento.</h2>
+        </div>
+        <p>
+          Prefiro mostrar o presente também. Projeto em andamento diz muito sobre ambição, foco e repertório. Aqui fica um retrato do que estou construindo, melhorando ou tentando levar para outro nível.
+        </p>
+      </div>
+
+      <div class="timeline">
+        <article class="card timeline-item reveal">
+          <b>Agora</b>
+          <h3>Refinando produtos que já têm uso prático</h3>
+          <p>
+            Em vez de pular de ideia em ideia, sigo fortalecendo sistemas que já têm base concreta — especialmente dashboards, interfaces operacionais e ferramentas para negócio.
+          </p>
+        </article>
+
+        <article class="card timeline-item reveal">
+          <b>Próximo</b>
+          <h3>Ampliar presença pública dos projetos</h3>
+          <p>
+            Organizar melhor o que merece vitrine pública, publicar mais repositórios e transformar projetos internos em casos visíveis, limpos e bem apresentados.
+          </p>
+        </article>
+
+        <article class="card timeline-item reveal">
+          <b>Direção</b>
+          <h3>Construir um ecossistema próprio de produtos</h3>
+          <p>
+            Não só freelas ou experimentos soltos — mas uma coleção de produtos, utilitários e sistemas com assinatura, identidade e visão de longo prazo.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="sobre">
+      <div class="about-grid">
+        <article class="card about-copy reveal">
+          <span class="chip">Sobre mim</span>
+          <div class="quote">Gosto do ponto em que estratégia, interface e implementação finalmente param de brigar entre si.</div>
+          <p>
+            Meu foco está em construir experiências digitais profissionais, mas sem cair no padrão engessado de “site bonito e vazio”. Tenho interesse especial por produtos que ajudam operação, organizam informação, melhoram decisão e dão sensação de ferramenta séria.
+          </p>
+          <p style="margin-top: 16px;">
+            Trabalho entre produto, design, frontend, backend pragmático e automação. Em outras palavras: gosto de fazer a coisa funcionar e também de fazer parecer que foi feita por alguém que se importa com detalhe.
+          </p>
+        </article>
+
+        <aside class="card contact-card reveal">
+          <div>
+            <span class="chip">Perfil rápido</span>
+            <ul class="stack-list">
+              <li><span>Nome</span><span>Ciro K.</span></li>
+              <li><span>Base</span><span>Brasil</span></li>
+              <li><span>Território</span><span>Produtos digitais, dashboards, automações, apps</span></li>
+              <li><span>Estilo</span><span>execução real, visual com identidade, evolução contínua</span></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="contato">
+      <div class="section-head reveal">
+        <div>
+          <span class="chip">Contato / presença</span>
+          <h2>Onde me encontrar.</h2>
+        </div>
+        <p>
+          Este espaço foi feito para ser meu ponto inicial público. Se quiser acompanhar o que estou construindo, o GitHub é o melhor lugar para começar.
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <article class="card contact-card reveal">
+          <div class="contact-copy">
+            <h3 style="font-size: 36px; line-height: 1.06; letter-spacing: -.04em; margin: 0 0 12px;">Presença principal</h3>
+            <p>
+              Repositórios públicos, experimentos e evolução dos meus projetos vivem aqui. Essa página foi pensada como uma porta de entrada mais autoral para o meu universo de construção.
+            </p>
+          </div>
+          <div class="contact-links">
+            <a href="https://github.com/cirokk" target="_blank" rel="noreferrer">
+              <span>GitHub / cirokk</span>
+              <span>github.com/cirokk ↗</span>
+            </a>
+            <a href="https://github.com/cirokk/cirokk.github.io" target="_blank" rel="noreferrer">
+              <span>Repositório desta página</span>
+              <span>cirokk.github.io ↗</span>
+            </a>
+          </div>
+        </article>
+
+        <article class="card about-copy reveal">
+          <span class="chip">Nota final</span>
+          <p>
+            Nada aqui foi montado para parecer “mais profissional” no automático. A intenção foi outra: criar uma presença que mostre construção real, repertório vivo e uma estética menos previsível. Se eu vou ter um GitHub Pages, melhor que ele tenha cara de alguém — não de template.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <footer class="footer reveal">
+      <p>Criado para <strong style="color: var(--text); font-weight: 600;">Ciro K.</strong> · atualizado em 6 de abril de 2026 · publicado via GitHub Pages.</p>
+    </footer>
+  </main>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach((el, index) => {
+      el.style.transitionDelay = `${Math.min(index * 40, 240)}ms`;
+      observer.observe(el);
+    });
+  </script>
 </body>
 </html>
