@@ -512,6 +512,119 @@
       min-height: 220px;
     }
 
+    .ai-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+
+    .ai-card,
+    .process-card,
+    .manifesto-card {
+      padding: 28px;
+    }
+
+    .ai-card {
+      grid-column: span 4;
+      min-height: 240px;
+    }
+
+    .ai-card h3,
+    .process-card h3,
+    .manifesto-card h3 {
+      font-size: 32px;
+      line-height: 1.04;
+      letter-spacing: -.04em;
+      margin: 12px 0 12px;
+    }
+
+    .ai-card p,
+    .process-card p,
+    .manifesto-card p,
+    .process-step p {
+      color: var(--muted);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    .ai-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.09);
+      color: var(--gold-2);
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .process-wrap {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+    }
+
+    .process-steps {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .process-step {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .process-step b {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(231,185,108,.22), rgba(255,255,255,.05));
+      border: 1px solid rgba(255,255,255,.12);
+      color: var(--gold-2);
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .process-step strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 6px;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .manifesto-card {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        radial-gradient(circle at right top, rgba(231,185,108,.1), transparent 24%),
+        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
+    }
+
+    .manifesto-text {
+      font-size: clamp(28px, 3.4vw, 46px);
+      line-height: 1.12;
+      letter-spacing: -.05em;
+      margin: 18px 0;
+      max-width: 12ch;
+    }
+
     .timeline-item b {
       display: block;
       color: var(--gold-2);
@@ -627,14 +740,16 @@
     @media (max-width: 1080px) {
       .hero-grid,
       .about-grid,
-      .timeline {
+      .timeline,
+      .process-wrap {
         grid-template-columns: 1fr;
       }
 
       .projects-grid { grid-template-columns: repeat(1, 1fr); display: grid; }
-      .project, .project.featured { grid-column: auto; }
+      .project, .project.featured, .ai-card { grid-column: auto; }
       .hero-main { min-height: auto; }
       .section-head { flex-direction: column; align-items: flex-start; }
+      .ai-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 760px) {
@@ -903,6 +1018,112 @@
             </div>
           </div>
         </article>
+      </div>
+    </section>
+
+    <section class="section" id="stack-ia">
+      <div class="section-head reveal">
+        <div>
+          <span class="chip">Meu stack de IA</span>
+          <h2>Não uso IA como enfeite. Uso como arsenal de construção.</h2>
+        </div>
+        <p>
+          Cada modelo entra melhor em um tipo de etapa. Em vez de depender de uma ferramenta só, prefiro combinar inteligências diferentes para acelerar raciocínio, código, estrutura, interface e decisão.
+        </p>
+      </div>
+
+      <div class="ai-grid">
+        <article class="card ai-card reveal">
+          <span class="ai-badge">Claude</span>
+          <h3>Arquitetura e refino</h3>
+          <p>Uso quando preciso organizar contexto grande, pensar melhor a estrutura, lapidar implementação e manter coerência em projetos mais densos.</p>
+        </article>
+
+        <article class="card ai-card reveal">
+          <span class="ai-badge">ChatGPT</span>
+          <h3>Velocidade e síntese</h3>
+          <p>Entra forte em ideação, estruturação rápida, texto, solução prática e aceleração de tarefas em várias frentes do build.</p>
+        </article>
+
+        <article class="card ai-card reveal">
+          <span class="ai-badge">Gemini</span>
+          <h3>Exploração e amplitude</h3>
+          <p>Bom para explorar caminhos, comparar abordagens, resumir contexto e abrir possibilidades quando o projeto pede visão mais ampla.</p>
+        </article>
+
+        <article class="card ai-card reveal">
+          <span class="ai-badge">Qwen</span>
+          <h3>Código e experimentação</h3>
+          <p>Uso bastante para construir, testar ideias rápido e iterar em tarefas técnicas com ritmo mais agressivo.</p>
+        </article>
+
+        <article class="card ai-card reveal">
+          <span class="ai-badge">Grok</span>
+          <h3>Brainstorm menos óbvio</h3>
+          <p>Ajuda quando quero sair do trilho previsível, provocar ideias e estressar conceitos antes de decidir uma direção.</p>
+        </article>
+
+        <article class="card ai-card reveal">
+          <span class="ai-badge">GLM</span>
+          <h3>Alternativa forte no fluxo</h3>
+          <p>Entra como mais uma peça relevante no ecossistema, principalmente para geração, apoio técnico e comparação de saída.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="como-construo-ia">
+      <div class="section-head reveal">
+        <div>
+          <span class="chip">Como eu construo com IA</span>
+          <h2>IA acelera o processo. A direção continua sendo minha.</h2>
+        </div>
+        <p>
+          O ponto não é pedir qualquer coisa para um modelo e aceitar. O ponto é orquestrar ferramentas, escolher o que presta, cortar o excesso e transformar isso em produto publicado.
+        </p>
+      </div>
+
+      <div class="process-wrap">
+        <article class="card process-card reveal">
+          <h3>Meu fluxo</h3>
+          <div class="process-steps">
+            <div class="process-step">
+              <b>01</b>
+              <div>
+                <strong>Parto do problema real</strong>
+                <p>Antes de sair gerando, eu defino o que precisa existir, para quem e o que seria uma solução útil de verdade.</p>
+              </div>
+            </div>
+            <div class="process-step">
+              <b>02</b>
+              <div>
+                <strong>Uso IA para abrir caminhos</strong>
+                <p>Exploro alternativas, estruturas, referências, arquitetura, fluxos e possibilidades sem desperdiçar tempo no zero absoluto.</p>
+              </div>
+            </div>
+            <div class="process-step">
+              <b>03</b>
+              <div>
+                <strong>Escolho, corto e refino</strong>
+                <p>Nem tudo que a IA gera presta. Meu trabalho é dirigir, editar, juntar peças boas e eliminar o que soa genérico ou fraco.</p>
+              </div>
+            </div>
+            <div class="process-step">
+              <b>04</b>
+              <div>
+                <strong>Transformo em produto</strong>
+                <p>Interface, lógica, experiência, deploy e iteração: o objetivo final é sair com algo real, usável e melhorável.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <aside class="card manifesto-card reveal">
+          <span class="chip">Manifesto curto</span>
+          <div class="manifesto-text">Vibecoding, pra mim, não é apertar botão e aceitar qualquer saída.</div>
+          <p>
+            É pilotar várias IAs, escolher o que presta, cortar o excesso e transformar isso em software com identidade, direção e entrega. A IA entra para ampliar alcance e velocidade. O critério continua humano.
+          </p>
+        </aside>
       </div>
     </section>
 
